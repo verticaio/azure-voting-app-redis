@@ -4,7 +4,7 @@ pipeline {
     PROJECT_NAME = 'myproject'
 	 DOCKER_REPO = 'demodocker'
 	 MS_NAME = 'vote_app'
-    REGISTRY_URL = '192.168.0.106:8082'
+    REGISTRY_URL = 'nexus:8082'
 	 DOCKER_REPO_PASSWORD = credentials('docker_api_token') 
     KUBETEST_CREDS = credentials('kubetest_config')
     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}" 
@@ -80,7 +80,7 @@ pipeline {
          }
       }
 
-      stage('Container Scanning') {
+      stage('Container Scanning In Paralel') {
          parallel {
             stage('Run OTHER Tool') {
                steps {
