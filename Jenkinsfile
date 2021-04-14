@@ -25,8 +25,8 @@ pipeline {
       }} 
 
       stage("Docker Build") {
-         dir("$WORKSPACE/azure-vote"){
-            steps {
+         steps {
+               dir("$WORKSPACE/azure-vote"){
                sh "docker build --rm -t $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP ." 
       }}}
 
