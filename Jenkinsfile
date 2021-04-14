@@ -25,9 +25,10 @@ pipeline {
       }} 
 
       stage("Docker Build") {
-         steps {
-               sh "cd azure-vote/ ; docker build --rm -t $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP . ; cd .." 
-      }}
+         dir("$WORKSPACE/azure-vote"){
+            steps {
+               sh "docker build --rm -t $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP ." 
+      }}}
 
       stage("Docker Push ") {
          steps {
