@@ -35,7 +35,7 @@ pipeline {
                sh  "docker push $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
                sh  "docker rmi $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
       }} 
-      stage('Docker Build') {
+      stage('Docker Build02') {
          steps {
             sh(script: 'docker images -a')
             sh(script: """
