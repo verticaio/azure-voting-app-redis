@@ -34,8 +34,13 @@ pipeline {
          steps {
                echo 'Start pushing to nexus repo...'
                sh  "docker push $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
-               sh  "docker rmi $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
       }} 
+
+      // stage("Docker REMOVE IMAGE LOCAL ") {
+      //    steps {
+      //          echo 'Start removing image from local env...'
+      //          sh  "docker rmi $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
+      // }} 
       stage('Docker Build02') {
          steps {
             sh(script: 'docker images -a')
@@ -85,7 +90,7 @@ pipeline {
             stage('Run OTHER Tool') {
                steps {
                   sh(script: """
-                     echo "RUN another security scanning here clair, fortivy, anchore and etc"
+                     echo "RUN another security scanning here clair, fortify, anchore and etc"
                   """)
                }
             }
@@ -100,7 +105,6 @@ pipeline {
             }
          }
       }
-
 
    }
 }
