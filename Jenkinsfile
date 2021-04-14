@@ -79,5 +79,28 @@ pipeline {
             """)
          }
       }
+
+      stage('Container Scanning') {
+         parallel {
+            stage('Run OTHER Tool') {
+               steps {
+                  sh(script: """
+                     echo "RUN another security scanning here clair, fortivy, anchore and etc"
+                  """)
+               }
+            }
+            stage('Run Trivy') {
+               steps {
+                  sleep(time: 30, unit: 'SECONDS')
+                   sh(script: """
+                   trivy  --clear-cache  image  --exit-code 0 --severity MEDIUM,LOW  $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP # continue when find it MEDIUM,LOW 
+                   #trivy  --clear-cache  image  --exit-code 1 --severity CRITICAL,HIGH $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP # stop pipeline when find it CRITICAL,HIGH 
+                   """)
+               }
+            }
+         }
+      }
+
+
    }
 }
