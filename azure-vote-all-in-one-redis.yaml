@@ -4,6 +4,9 @@ metadata:
   name: redis-app
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: redis-app
   template:
     metadata:
       labels:
@@ -32,6 +35,9 @@ metadata:
   name: ms-name
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: ms-name
   strategy:
     rollingUpdate:
       maxSurge: 1
