@@ -66,5 +66,26 @@ pipeline {
          }
       }
 
+      stage('Container Scanning In Paralel') {
+         parallel {
+            stage('Run OTHER Tool') {
+               steps {
+                  sh(script: """
+                     echo "RUN another security scanning here clair, fortify, anchore and etc"
+                  """)
+               }
+            }
+            stage('Run Trivy') {
+               steps {
+                  sleep(time: 30, unit: 'SECONDS')
+                   sh(script: """
+                   trivy    image  --exit-code 0 --severity MEDIUM,LOW  jenkins-pipeline  # continue when find it MEDIUM,LOW 
+                   #trivy   image  --exit-code 1 --severity CRITICAL,HIGH $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP # stop pipeline when find it CRITICAL,HIGH 
+                   """)
+               }
+            }
+         }
+      }
+
    }
 }
