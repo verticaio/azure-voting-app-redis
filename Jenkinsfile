@@ -20,6 +20,30 @@ pipeline {
          }
       }
 
+      stage('Docker Login') {
+         steps {
+               echo 'Login to nexus repo...'
+               sh "docker login -u admin -p $DOCKER_REPO_PASSWORD $REGISTRY_URL/$DOCKER_REPO"
+      }} 
+
+      stage("Docker Build") {
+         steps {
+               dir("$WORKSPACE/azure-vote"){
+               sh "docker build --rm -t $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP ." 
+      }}}
+
+      stage("Docker Push ") {
+         steps {
+               echo 'Start pushing to nexus repo...'
+               sh  "docker push $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
+      }} 
+
+      // stage("Docker REMOVE IMAGE LOCAL ") {
+      //    steps {
+      //          echo 'Start removing image from local env...'
+      //          sh  "docker rmi $REGISTRY_URL/$DOCKER_REPO/$PROJECT_NAME/$MS_NAME:$BUILD_TIMESTAMP"
+      // }} 
+
       stage('Docker Build Different') {
          steps {
             sh(script: 'docker images -a')
