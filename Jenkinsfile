@@ -109,5 +109,21 @@ pipeline {
          }
       }
 
+
+      stage('Deploy to PROD') {
+         environment {
+            ENVIRONMENT = 'prod'
+         }
+         steps {
+            echo "Deploying to ${ENVIRONMENT}"
+            sh(script: """
+            sed -i  "s/ms-name/$MS_NAME/g ;  s/project_name/$PROJECT_NAME/g ;  s/test:latest/$MS_NAME:$BUILD_TIMESTAMP/g" azure-vote-all-in-one-redis.yaml
+            cat azure-vote-all-in-one-redis.yaml 
+            kubectl  apply -f  azure-vote-all-in-one-redis.yaml  --kubeconfig $KUBETEST_CREDS  --namespace $PROJECT_NAME-$ENVIRONMENT
+            """)
+         }
+      }
+
+
    }
 }
