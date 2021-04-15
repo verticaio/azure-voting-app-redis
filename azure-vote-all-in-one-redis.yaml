@@ -37,7 +37,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      run: ms-name
+      app: ms-name
   strategy:
     rollingUpdate:
       maxSurge: 1
