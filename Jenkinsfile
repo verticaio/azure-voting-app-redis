@@ -25,11 +25,29 @@ pipeline {
             sh(script: 'docker images -a')
             sh(script: """
                cd azure-vote/
-               docker images -a
+               #docker images -a
                docker build -t jenkins-pipeline .
-               docker images -a
+               #docker images -a
                cd ..
             """)
+         }
+      }
+
+      stage('Start test app') {
+         steps {
+            sh(script: """
+               docker-compose up -d
+               chmod +x ./scripts/test_container.sh
+               ./scripts/test_container.sh
+            """)
+         }
+         post {
+            success {
+               echo "App started successfully :)"
+            }
+            failure {
+               echo "App failed to start :("
+            }
          }
       }
 
