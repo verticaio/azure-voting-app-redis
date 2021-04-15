@@ -4,7 +4,7 @@ pipeline {
    environment {
     PROJECT_NAME = 'myproject'
 	 DOCKER_REPO = 'demodocker'
-	 MS_NAME = 'vote_app'
+	 MS_NAME = 'vote-app'
     REGISTRY_URL = 'nexus:8082'
 	 DOCKER_REPO_PASSWORD = credentials('docker_api_token') 
     KUBETEST_CREDS = credentials('kubetest_config')
