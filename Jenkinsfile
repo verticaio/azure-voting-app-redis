@@ -108,9 +108,30 @@ pipeline {
             }
          }
       }
-
+      stage('Approve PROD Deploy') {
+         when {
+            branch 'master'
+         }
+         options {
+            timeout(time: 1, unit: 'HOURS') 
+         }
+         steps {
+            input message: "Deploy?"
+         }
+         post {
+            success {
+               echo "Production Deploy Approved"
+            }
+            aborted {
+               echo "Production Deploy Denied"
+            }
+         }
+      }
 
       stage('Deploy to PROD') {
+         when {
+            branch 'master'
+         }
          environment {
             ENVIRONMENT = 'prod'
          }
@@ -125,6 +146,9 @@ pipeline {
       }
 
       stage('Check App Started') {
+         when {
+            branch 'master'
+         }
          environment {
             ENVIRONMENT = 'prod'
          }
