@@ -134,7 +134,7 @@ pipeline {
             		waitUntil {
                         script {
                             def r = sh(script:" if [ \"\$(kubectl get pod --kubeconfig $KUBETEST_CREDS -o jsonpath=\"{..ready}\" -l app=$MS_NAME --namespace $PROJECT_NAME-$ENVIRONMENT)\" = \"false\" ]; then exit 1; else exit 0; fi", returnStatus: true)
-                            return (r == 0);
+                            //return (r == 0);
                         }
           	  		}
        	 		}
