@@ -140,7 +140,10 @@ pipeline {
        	 		}
          }
       }
-
-
-   }
+}
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
