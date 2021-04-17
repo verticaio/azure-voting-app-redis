@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: ms-name
-        image: nnexus:8082/demodocker/project_name/test:latest
+        image: nexus:8082/demodocker/project_name/test:latest
         ports:
         - containerPort: 80
         resources:
