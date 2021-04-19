@@ -1,5 +1,5 @@
 pipeline {
-   agent { label 'master'}
+   agent { label 'slave01'}
 
    environment {
     PROJECT_NAME = 'myproject'
