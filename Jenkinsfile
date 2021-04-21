@@ -1,4 +1,4 @@
-@Library('github.com/devbyaccident/demo-shared-pipeline.git') _ 
+@Library('github.com/verticaio/demo-shared-pipeline.git') _ 
 
 pipeline{
     agent any
