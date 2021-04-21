@@ -1,11 +1,34 @@
-node {
-   stage('Echo on Master'){
-      if (env.BRANCH_NAME == 'master'){
-         echo 'It is master branch'
-      }
-      else {
-          echo 'It is not master branch'
-      }
+@Library('github.com/devbyaccident/demo-shared-pipeline.git') _ 
 
-   }
+pipeline{
+    agent any
+    stages{
+        stage("Call Library Hello Word Function"){
+            steps{
+                script { helloWorld() }
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "========A executed successfully========"
+                }
+                failure{
+                    echo "========A execution failed========"
+                }
+            }
+        }
+    }
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
 }
