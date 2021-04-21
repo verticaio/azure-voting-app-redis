@@ -145,6 +145,11 @@ pipeline {
          }
       }
 
+// echo ""
+// echo "waiting for hello pod to be ready..."
+// while [[ $(kubectl get pods -l app=hello -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for pod" && sleep 1; done
+// echo "pod is ready"      
+
       stage('Check App Started') {
          when {
             branch 'master'
