@@ -1,5 +1,5 @@
 pipeline {
-   agent { any; }
+   agent  any
 
    environment {
     PROJECT_NAME = 'myproject'
