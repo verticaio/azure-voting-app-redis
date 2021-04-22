@@ -88,7 +88,7 @@ pipeline {
          }
       }
 
-node("slave02") {
+ node (label: 'slave02') {
       stage('Container Scanning In Paralel') {
          parallel {
             stage('Run OTHER Tool') {
