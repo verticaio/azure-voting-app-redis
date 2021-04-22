@@ -15,12 +15,7 @@ pipeline{
     stages{
         stage("Call Library Function with an Argument"){
             steps{
-                script { helloArgs('Jenkins!') }
-            }
-        }
-        stage("Call Additional Library Function with an Argument"){
-            steps{
-                script { helloArgs.goodbyeWorld('Jenkins!') }
+                script { helloWorld() }
             }
         }
     }
