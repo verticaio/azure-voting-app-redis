@@ -1,0 +1,17 @@
+@Library('github.com/verticaio/demo-shared-pipeline.git') _ 
+
+pipeline{
+    agent any
+    stages{
+        stage("Call Library Function with an Argument"){
+            steps{
+                script { helloArgs('Jenkins!') }
+            }
+        }
+        stage("Call Additional Library Function with an Argument"){
+            steps{
+                script { helloArgs.goodbyeWorld('Jenkins!') }
+            }
+        }
+    }
+}

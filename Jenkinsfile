@@ -1,4 +1,14 @@
-@Library('github.com/verticaio/demo-shared-pipeline.git') _ 
+@Library('shared_lib1@master') _ 
+
+library identifier: 'shared_lib1@master',
+    //'master' refers to a valid git-ref
+    //'mylibraryname' can be any name you like
+    retriever: modernSCM([
+      $class: 'GitSCMSource',
+      credentialsId: 'GitHubConnection',
+      remote: 'https://github.com/verticaio/demo-shared-pipeline.git'
+])
+
 
 pipeline{
     agent any
@@ -7,28 +17,6 @@ pipeline{
             steps{
                 script { helloWorld() }
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
