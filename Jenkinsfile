@@ -1,5 +1,12 @@
-@Library('shared_lib@master') _ 
+@Library('github.com/verticaio/demo-shared-pipeline.git') _ 
 
-echoPipeline {
-    message = "I tried to ping"
+pipeline{
+    agent any
+    stages{
+        stage("Call Library Function with an Argument"){
+            steps{
+                script { helloWorld() }
+            }
+        }
+    }
 }
