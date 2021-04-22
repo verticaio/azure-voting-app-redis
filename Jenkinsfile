@@ -12,4 +12,5 @@ library identifier: 'shared_lib@master',
 
 echoPipeline() {
     message = 'Salam Test'
+    message2 = 'Salam1'
 }
