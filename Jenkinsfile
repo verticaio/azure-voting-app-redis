@@ -1,6 +1,6 @@
-@Library('shared_lib1@master') _ 
+@Library('shared_lib@master') _ 
 
-library identifier: 'shared_lib1@master',
+library identifier: 'shared_lib@master',
     //'master' refers to a valid git-ref
     //'mylibraryname' can be any name you like
     retriever: modernSCM([
