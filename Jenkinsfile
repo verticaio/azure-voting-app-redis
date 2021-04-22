@@ -1,5 +1,5 @@
 pipeline {
-   agent  any
+   agent { label 'slave01' }
 
    environment {
     PROJECT_NAME = 'myproject'
@@ -88,7 +88,6 @@ pipeline {
          }
       }
 
- node (label: 'slave02') {
       stage('Container Scanning In Paralel') {
          parallel {
             stage('Run OTHER Tool') {
@@ -108,7 +107,7 @@ pipeline {
                }
             }
          }
-      }}
+      }
       stage('Approve PROD Deploy') {
          when {
             branch 'master'
@@ -171,9 +170,9 @@ pipeline {
          }
       }
 }
-    post {
-        always {
-            cleanWs()
-        }
-    }
+   //  post {
+   //      always {
+   //          cleanWs()
+   //      }
+   //  }
 }
