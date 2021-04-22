@@ -10,18 +10,6 @@ library identifier: 'shared_lib@master',
       remote: 'https://github.com/verticaio/demo-shared-pipeline.git'
 ])
 
-pipeline{
-    agent any
-    stages{
-        stage("Call Library Function with an Argument"){
-            steps{
-                script { helloArgs('Jenkins!') }
-            }
-        }
-        stage("Call Additional Library Function with an Argument"){
-            steps{
-                script { helloArgs.goodbyeWorld('Jenkins!') }
-            }
-        }
-    }
+echoPipeline() {
+    message = 'Salam Test'
 }
