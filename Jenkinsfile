@@ -88,6 +88,7 @@ pipeline {
          }
       }
 
+node("slave02") {
       stage('Container Scanning In Paralel') {
          parallel {
             stage('Run OTHER Tool') {
@@ -107,7 +108,7 @@ pipeline {
                }
             }
          }
-      }
+      }}
       stage('Approve PROD Deploy') {
          when {
             branch 'master'
