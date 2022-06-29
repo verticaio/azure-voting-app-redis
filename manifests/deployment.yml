@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "commonaks-cc1b"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "commonaks-cc1b"
+  template:
+    metadata:
+      labels:
+        app: "commonaks-cc1b"
+    spec:
+      containers:
+        - name: "commonaks-cc1b"
+          image: "commoninteliregistry.azurecr.io/commonaks"
+          ports:
+          - containerPort: 80
